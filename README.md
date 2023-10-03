@@ -4,46 +4,21 @@ This repo contains examples using patterns outlined in Functional Programming in
 to handle common issues encountered in a Spark data setup. These examples use either
 Scala native with Spark, Spark SQL functions enabling FP, and Python TODO.
 
-## Chapter 3: Functional Data Structures
+## Book: Functional Programming in Scala
 
-In Chapter 3, data structures are built and transformed with pure functions
-using the example of a constructing simplified `List[+A]` singely linked list.
-Working through the exercises will give an inmate understanding of core collection
-methods, native Scala List data sharing, and pattern matching.
+Official Link: [_Functional Programming in Scala_ by Chiusano and Bjarnason](https://www.manning.com/books/functional-programming-in-scala)
 
-While this is useful Scala knownledge, the core data structures used in Spark are
-completely isolated and different than those of native Scala. Spark users will not
-use these techniques on the data itself but on the higher order operations performed
-on `Dataframes`.
+TODO
 
-### Example: Folding a Sequence of Operations on a Dataframe
+## Benefits for Spark Users
 
-_Reference: Section 3.4 - Recursion over lists and generalizing to higher-order functions_
+- Great for improving knowledge of core Scala syntax and code patterns
+- `Option` handling critical to NULL and exception processing in UDFs
+- Higher order function patterns can be used to automate complex 
+transformations on Dataframe and Datasets
+- Error from specific operations can be more robustly using `Either`
 
-Often repeated operations are a `Dataframe` lead to long chains of `.withColumn`, 
-`.withColumnRenamed`, `.select` etc, copied and pasted to iterate over variants.
-Using a **fold** on a sequence of values either set by constant or dynamically at runtime,
-a sequence of operations on the `Dataframe` can be "automated". This can clean up code
-but also allows for more complex operations defined at runtime.
+## Using with Spark Docs
 
-The authors introduce the `.foldRight` primarily to fit with the specific singlely linked
-list example. Spark engineers will instead use the the `.foldLeft` instead to iterate over
-a sequence of information in the expected order of the sequence.
-
-A simple use of this technique is folding a constant set sequence to perform repeated
-operations with different parameters. In the example below, three (or more) cell towers
-are given in three dimensional space and then a dataset of individual 
-
-```scala
-val towers
-
-val df: Dataframe = Seq(
-  ()
-)
-```
-
-### Example: Column List Generation
-
-One simple example is column list generation for performing 
-
-For example, in section 
+3. [Chapter 3: Functional Data Structures](./docs/chap-3-functional-data-structures.md)
+4. [Chapter 4: Handling Errors without Exceptions]()
