@@ -12,11 +12,33 @@ on `Dataframes`. Using
 
 ## Relevant Content
 
-### Mapping and Filtering Arrays
+### Functional Methods on Data Structures 
 
 _Reference: Section 3.4.1 - More functions for working with lists_
 
-The concept of applying 
+The concept of applying a function to data through the `.map` method
+may or may not be familiar to a Spark user. In the early days of Spark,
+this method was commonly called on the RDD directly and was part of the
+first `.paralleize` examples at the start of their own tutorial. Now, the
+Spark SQL conventions don't always use `.map` directly (can be used with
+typed Datasets) but use the same concept with more the explicit methods
+on the DataFrame like `.withColumn`, `.select`, or `.join`.
+
+These practices come from the same basic concept to maintain immutability
+of the underlying data, operations produce a new copy of the data rather
+than modifying the same data object. Spark engineers encounter this generating
+and iterating through native Scala collections, TODO, and more recently, 
+using `transform` (map), `filter`, and other array based to UDF to apply
+functional operations on Spark `ArrayType` columns.
+
+**Key Scala / Spark Collection Methods:**
+
+- `map` : Used to transform underlying data by mapping a function to each element
+- `flatMap`: Used to transform underlying data by mapping a function to each element
+with a different return type than input
+- `filter`: Used to filter down data by applying boolean function to each element
+- `reduce`: Used to apply function to reduce all elements of data into single element
+- `fold`: Used for apply function sequentially to initially defined object
 
 ### Folding Operations on a Dataframe
 
@@ -36,7 +58,9 @@ a sequence of information in the expected order of the sequence.
 def foldLeft[B](z: B)(op: (B, A) => B): B
 ```
 
-By folding a sequence of 
+By folding a sequence of operations onto an initial DataFrame, the immunity of the
+underlying Scala variables is guaranteed and we also force the engineer to define
+the operations in a re-usable and more general manner.
 
 ## Example: Dynamically Performing Repeated Actions 
 
@@ -66,7 +90,7 @@ val df: DataFrame = Seq(
   (104, 0.456, -23.40, -2.7), (105, 24.3, 56.3, -1.9)
 ).toDF("id", "x", "y", "z")
 
-// Define distance function 
+// Define distance columns using FP methods on coordinate collection
 def distFunction(towerId: String): Column = sqrt(
   Seq("x", "y", "x")
     .map(coord => col(s"diff_${coord}_$towerId") * col(s"diff_${coord}_$towerId"))

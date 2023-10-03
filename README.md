@@ -19,7 +19,11 @@ benefit greatly from using FP approaches when appropriate.
 
 ## Book: Functional Programming in Scala
 
+![Book Cover](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.epb0grWt_qc59nd-0hwPTAHaJS%26pid%3DApi&f=1&ipt=eb1bf7575e4575481b6b6d3bf93ff2f80a2408c319c019476e9825d29431950a&ipo=images)
+
 Official Link: [_Functional Programming in Scala_ by Chiusano and Bjarnason](https://www.manning.com/books/functional-programming-in-scala)
+
+Github Link: [fpinscala Project](https://github.com/fpinscala/fpinscala)
 
 The first edition of this book, released in 2014, is now available for free at the link above.
 The concepts are still relevant and widely used in any major Scala package, especially
@@ -29,6 +33,14 @@ Working through both the reading material and exercises is difficult and slow bu
 extremely rewarding. Individual chapters can be worked in rough isolation with
 the authors providing detailed answers and accompanying code in the Github link above.
 
+### Book Chapters
+
+
+1. What is Functional Programming?
+2. Getting Started with Functional Programming in Scala
+3. Functional Data Structures
+4. Handling Errors with Expressions
+
 ### Benefits for Spark Users
 
 - Great for improving knowledge of core Scala syntax and code patterns
@@ -36,10 +48,7 @@ the authors providing detailed answers and accompanying code in the Github link 
 - Higher order function patterns can be used to automate complex 
 transformations on Dataframe and Datasets
 - Error from specific operations can be more robustly using `Either`
-
-### Book Chapters
-
-TODO
+- Understand and utilize native Scala to safely parallelize data jobs or tasks
 
 ## Using with Spark Docs
 
