@@ -45,18 +45,26 @@ val towers = Seq(
   Tower("C3", 30.24, 0.00, -1.23)
 )
 
-// Dataset of cell users with x, y, and z corri
+// Dataset of cell users with x, y, and z coordinates
 val df: Dataframe = Seq(
   (101, 0.0, 0.0, 0.0), (102, 2.3, -4.5, 4.23), (103, -35.3, 53.0, 35.2),
   (104, 0.456, -23.40, -2.7), (105, )
 ).toDF("id", "x", "y", "z")
+
+// Create difference columns for each dimension and 
+// calculate total distance to each tower
+def distFunction(t: String): Column = sqrt(
+  Seq("x", "y", "x")
+    .map(c => col(s"diff_$c_$t") * col(s"diff_$c_$t"))
+    .reduce(_ + _)
+)
 
 towers.foldLeft(df)(
   (df, t) => df
     .withColumn(s"diff_x_$t", col("x") - lit(t.x))
     .withColumn(s"diff_y_$t", col("y") - lit(t.y))
     .withColumn(s"diff_z_$t", col("z") - lit(t.z))
-    .withColumn
+    .withColumn(s"dist_$t", distFunction(t))
 )
 
 ```
