@@ -40,6 +40,17 @@ the authors providing detailed answers and accompanying code in the Github link 
 2. Getting Started with Functional Programming in Scala
 3. Functional Data Structures
 4. Handling Errors with Expressions
+5. Strictness and Laziness
+6. Purely Functional State
+7. Purely Functional Parallelism
+8. Property-based testing
+9. Parser Combinators
+10. Monoids
+11. Monads
+12. Applicative and Transversable Functors
+13. External Effects and I/O
+14. Local Effects and Mutable State
+15. Steam Processing and Incremental I/O
 
 ### Benefits for Spark Users
 
