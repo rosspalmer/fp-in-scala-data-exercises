@@ -8,7 +8,7 @@ methods, native Scala List data sharing, and pattern matching.
 While this is useful Scala knowledge, the core data structures used in Spark are
 completely isolated and different than those of native Scala. Spark users will not
 use these techniques on the data itself but on the higher order operations performed
-on `Dataframes`. Using 
+on `Dataframes` and small native collections used to drive program logic. 
 
 ## Relevant Content
 
@@ -19,7 +19,7 @@ _Reference: Section 3.4.1 - More functions for working with lists_
 The concept of applying a function to data through the `.map` method
 may or may not be familiar to a Spark user. In the early days of Spark,
 this method was commonly called on the RDD directly and was part of the
-first `.paralleize` examples at the start of their own tutorial. Now, the
+first `.parallize` examples at the start of their own tutorial. Now, the
 Spark SQL conventions don't always use `.map` directly (can be used with
 typed Datasets) but use the same concept with more the explicit methods
 on the DataFrame like `.withColumn`, `.select`, or `.join`.
@@ -90,13 +90,15 @@ val df: DataFrame = Seq(
   (104, 0.456, -23.40, -2.7), (105, 24.3, 56.3, -1.9)
 ).toDF("id", "x", "y", "z")
 
-// Define distance columns using FP methods on coordinate collection
+// Define distance Column using FP methods on coordinate collection
 def distFunction(towerId: String): Column = sqrt(
   Seq("x", "y", "x")
     .map(coord => col(s"diff_${coord}_$towerId") * col(s"diff_${coord}_$towerId"))
     .reduce(_ + _)
 )
 
+// While preserving immutably of the DataFrame variable, dynamically
+// add `diff` and `dist` columns to dataset for each tower
 val dist = towers.foldLeft(df)(
   (df, t) => df
     .withColumn(s"diff_x_${t.id}", col("x") - lit(t.x))
